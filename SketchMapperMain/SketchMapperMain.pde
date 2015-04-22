@@ -23,8 +23,9 @@ public void setup() {
   sketchMapper = new SketchMapper(this);
   
   // Add different sketch options
-  sketchMapper.addSketch(new Levelizer(this, "Equalizer - Yellow", width / 2, height / 2, minim, in, color(240,242,166)));
-  sketchMapper.addSketch(new Levelizer(this, "Equalizer - Pink", width / 2, height / 2, minim, in, color(224,222,250)));
+  sketchMapper.addSketch(new Levelizer(this, "Levelizer - Yellow", width / 2, height / 2, minim, in, color(240,242,166)));
+  sketchMapper.addSketch(new Levelizer(this, "Levelizer - Pink", width / 2, height / 2, minim, in, color(224,222,250)));
+  sketchMapper.addSketch(new Equalizer(this, "Equalizer - Pink", width / 2, height / 2, minim, in, color(224,222,250)));
   sketchMapper.addSketch(new Circles(this, "Circles", width / 2, height / 2, minim, in));
   sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2, minim, in));
 
