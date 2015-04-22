@@ -10,6 +10,7 @@ public class Wanderers extends AbstractSketch {
     int numWanderers = 1000;
     int numColors = 2048;
     int colPtr = 0;
+    float vel = 0;
     
     color[] colors;
     ArrayList<Wanderer> wanderers;
@@ -27,12 +28,13 @@ public class Wanderers extends AbstractSketch {
 
     @Override
     public void draw() {
-        graphics.beginDraw();
-        
-        for (Wanderer f : wanderers) {
-            f.move();
-        }
-        graphics.endDraw();
+      vel = in.mix.level();
+      graphics.beginDraw();
+      
+      for (Wanderer f : wanderers) {
+          f.move();
+      }
+      graphics.endDraw();
     }
     
     color randColor() {
@@ -91,7 +93,7 @@ public class Wanderers extends AbstractSketch {
         float x = random(graphics.width);
         float y = random(graphics.height);
       
-        wanderers.add(new Wanderer(randColor(), x, y, random(360), 1));
+        wanderers.add(new Wanderer(randColor(), x, y, random(360)/*, 1*/));
       }
       
       for (int i = 0; i < numWanderers; ++i){
@@ -110,15 +112,15 @@ public class Wanderers extends AbstractSketch {
       color c;
       float x, y;
       float theta;
-      float vel;
+      //float vel;
       Wanderer target;
     
-      Wanderer(color c, float x, float  y, float theta, float vel) {
+      Wanderer(color c, float x, float  y, float theta/*, float vel*/) {
         this.c = c;
         this.x = x;
         this.y = y;
         this.theta = theta;
-        this.vel = vel;
+        //this.vel = vel;
       }
     
       void move() {
