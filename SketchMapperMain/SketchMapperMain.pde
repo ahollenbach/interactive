@@ -28,6 +28,7 @@ public void setup() {
   sketchMapper.addSketch(new Equalizer(this, "Equalizer - Pink", width / 2, height / 2, minim, in, color(224,222,250)));
   sketchMapper.addSketch(new Circles(this, "Circles", width / 2, height / 2, minim, in));
   sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2, minim, in));
+  sketchMapper.addSketch(new NewTest(this, "New", width / 2, height / 2, minim, in));
 
 }
 

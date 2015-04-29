@@ -1,19 +1,24 @@
 import ddf.minim.analysis.*;
-public class Equalizer extends AbstractSketch {
-    private int curColor;
+
+public class NewTest extends AbstractSketch {
     private String name;
 
     private Minim minim;
     private AudioInput in;
     private FFT fft;
+    
+    int[][] circles = new int[30][];
 
-    public Equalizer(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i, int colr) {
+    public NewTest(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
         super(parent, width, height);
 
         this.minim = m;
         this.in = i;
-        this.curColor = colr;
         this.name = name;
+        
+        for(int j=0;j<30;j++) {
+          circles[j] = getCircle(width, height);
+        }
     }
     
     @Override
@@ -30,7 +35,6 @@ public class Equalizer extends AbstractSketch {
     public void draw() {
         graphics.beginDraw();
         graphics.background(0);
-        graphics.fill(curColor);
 
         // Reverse the orientation of y axis
         graphics.scale(1, -1);
@@ -39,16 +43,34 @@ public class Equalizer extends AbstractSketch {
         // Draw the equalizer
         fft.forward(in.mix);
         int numSamples = 30; //fft.specSize()
-        float w = ((float)graphics.width)/numSamples;
+        
+        
         for (int i = 0; i < numSamples; i++) {
-           graphics.rect(i*w, 0, w, fft.getBand(i) * 8);
-           System.out.println(fft.getBand(i) * 4);
+           int[] c = circles[i];
+           graphics.fill(c[2],c[3],c[4]);
+           graphics.ellipse(c[0], c[1], fft.getBand(i) * 4, fft.getBand(i) * 4);
          }
          
         
         //graphics.rect(0, 0, graphics.width, graphics.height*in.mix.level()*4);
 
         graphics.endDraw();
+    }
+    
+    public int[] getCircle(float xBound, float yBound) {
+      int xB = Math.round(xBound);
+      int yB = Math.round(yBound);
+      
+      int[] circle = new int[5];
+      
+      circle[0] = Math.round(random(xB));
+      circle[1] = Math.round(random(yB));
+      
+      circle[2] = Math.round(random(255));
+      circle[3] = Math.round(random(255));
+      circle[4] = Math.round(random(255));
+      
+      return circle;
     }
 
     @Override

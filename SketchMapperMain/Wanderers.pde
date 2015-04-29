@@ -11,6 +11,7 @@ public class Wanderers extends AbstractSketch {
     int numColors = 2048;
     int colPtr = 0;
     float vel = 0;
+    float time = 0;
     
     color[] colors;
     ArrayList<Wanderer> wanderers;
@@ -28,7 +29,8 @@ public class Wanderers extends AbstractSketch {
 
     @Override
     public void draw() {
-      vel = in.mix.level();
+      
+      vel = in.mix.level()*4;
       graphics.beginDraw();
       
       for (Wanderer f : wanderers) {

@@ -71,6 +71,9 @@ public class Circles extends AbstractSketch {
     
     @Override
     void setup(){
+//      int timeSize = 2048;
+//      fft = new FFT(in.bufferSize(), in.sampleRate());
+      
       graphics.beginDraw();
       graphics.background(255);
       graphics.fill(255);
@@ -89,6 +92,15 @@ public class Circles extends AbstractSketch {
 
 
     void draw(){
+//      fft.forward(in.mix);
+//      
+//      int numSamples = 30; //fft.specSize()
+//      float w = ((float)graphics.width)/numSamples;
+//      for (int i = 0; i < numSamples; i++) {
+//         graphics.rect(i*w, 0, w, fft.getBand(i) * 4);
+//         System.out.println(fft.getBand(i) * 4);
+//       }
+      
       graphics.beginDraw();
       
       graphics.stroke(0, 50);
