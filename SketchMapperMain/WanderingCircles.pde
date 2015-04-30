@@ -47,6 +47,7 @@ public class WanderingCircles extends AbstractSketch {
         
         for (int i = 0; i < numSamples; i++) {
            int[] c = circles[i];
+           graphics.noStroke();
            graphics.fill(c[2],c[3],c[4]);
            float radius = getRadius(circles[i], fft.getBand(i) * 4); // fft.getBand(i) * 4;
            graphics.ellipse(c[0], c[1], radius, radius);
@@ -62,19 +63,20 @@ public class WanderingCircles extends AbstractSketch {
     /**
      * Because we couldn't figure out why we were getting compiler errors on the circle object (I blame Andrew)
      * we're just working with an array of circle parameters. The order is as follows:
-     * 1 - The circle center's x-coordinate
-     * 2 - The circle center's y-coordinate
-     * 3 - The circle's red color value
-     * 4 - The circle's green color value
-     * 5 - The circle's blue color value
-     * 6 - An integer approximation of the circle's last radius. 
+     * 0 - The circle center's x-coordinate
+     * 1 - The circle center's y-coordinate
+     * 2 - The circle's red color value
+     * 3 - The circle's green color value
+     * 4 - The circle's blue color value
+     * 5 - An integer approximation of the circle's last radius. 
      *        (Used for size gradient padding)
+     * 6/7 - The circle's movement vector.
      */
     public int[] getCircle(float xBound, float yBound) {
       int xB = Math.round(xBound);
       int yB = Math.round(yBound);
       
-      int[] circle = new int[6];
+      int[] circle = new int[8];
       
       circle[0] = Math.round(random(xB));
       circle[1] = Math.round(random(yB));
@@ -83,6 +85,8 @@ public class WanderingCircles extends AbstractSketch {
       circle[3] = Math.round(random(255));
       circle[4] = Math.round(random(255));
       circle[5] = 0;
+      circle[6] = Math.round(random(2)) - 1;
+      circle[7] = Math.round(random(2)) - 1;
       
       return circle;
     }
@@ -108,8 +112,25 @@ public class WanderingCircles extends AbstractSketch {
       int xMove = Math.round(random(2)) - 1;
       int yMove = Math.round(random(2)) - 1;
       
-      circle[0] += xMove;
-      circle[1] += yMove; 
+      circle[6] += xMove;
+      circle[7] += yMove;
+      
+      if(circle[6] > 2 || circle[6] < -2) circle[6] = 0;
+      if(circle[7] > 2 || circle[7] < -2) circle[7] = 0;
+      
+      circle[0] += circle[6];
+      circle[1] += circle[7]; 
+      
+      if(circle[0] < 0) {
+        circle[6] = Math.abs(circle[6]);
+      } else if(circle[0] > width) {
+        circle[6] = -1 * Math.abs(circle[6]);
+      }
+      if(circle[1] < 0) {
+        circle[7] = Math.abs(circle[7]);
+      } else if(circle[1] > height) {
+        circle[7] = -1 * Math.abs(circle[7]);
+      }
     }
 
     @Override
