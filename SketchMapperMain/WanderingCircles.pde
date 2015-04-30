@@ -1,6 +1,6 @@
 import ddf.minim.analysis.*;
 
-public class NewTest extends AbstractSketch {
+public class WanderingCircles extends AbstractSketch {
     private String name;
 
     private Minim minim;
@@ -9,7 +9,7 @@ public class NewTest extends AbstractSketch {
     
     int[][] circles = new int[30][];
 
-    public NewTest(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
+    public WanderingCircles(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
         super(parent, width, height);
 
         this.minim = m;
@@ -49,6 +49,7 @@ public class NewTest extends AbstractSketch {
            int[] c = circles[i];
            graphics.fill(c[2],c[3],c[4]);
            graphics.ellipse(c[0], c[1], fft.getBand(i) * 4, fft.getBand(i) * 4);
+           wander(circles[i]);
          }
          
         
@@ -71,6 +72,14 @@ public class NewTest extends AbstractSketch {
       circle[4] = Math.round(random(255));
       
       return circle;
+    }
+    
+    public void wander(int[] circle) {
+      int xMove = Math.round(random(2)) - 1;
+      int yMove = Math.round(random(2)) - 1;
+      
+      circle[0] += xMove;
+      circle[1] += yMove; 
     }
 
     @Override
