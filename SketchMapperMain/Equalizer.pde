@@ -18,12 +18,14 @@ public class Equalizer extends AbstractSketch {
     
     @Override
     public void setup() {
-      int timeSize = 2048;
       fft = new FFT(in.bufferSize(), in.sampleRate());
       System.out.println("=======");
-      System.out.println(timeSize);
       System.out.println(in.bufferSize());
       System.out.println(in.sampleRate());
+      
+      fft.logAverages(11,12);
+      
+      System.out.println(fft.specSize());
     }
 
     @Override
@@ -38,11 +40,10 @@ public class Equalizer extends AbstractSketch {
 
         // Draw the equalizer
         fft.forward(in.mix);
-        int numSamples = 30; //fft.specSize()
+        int numSamples = 11*8; //fft.specSize()
         float w = ((float)graphics.width)/numSamples;
         for (int i = 0; i < numSamples; i++) {
            graphics.rect(i*w, 0, w, fft.getBand(i) * 8);
-           System.out.println(fft.getBand(i) * 4);
          }
          
         
