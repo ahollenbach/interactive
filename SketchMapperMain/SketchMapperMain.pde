@@ -29,6 +29,7 @@ public void setup() {
   sketchMapper.addSketch(new Circles(this, "Circles", width / 2, height / 2, minim, in));
   sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2, minim, in));
   sketchMapper.addSketch(new WanderingCircles(this, "WanderingCircles", width / 2, height / 2, minim, in));
+  sketchMapper.addSketch(new SpinningSquares(this, "Spinning Squares", width / 2, height / 2, minim, in));
 
 }
 

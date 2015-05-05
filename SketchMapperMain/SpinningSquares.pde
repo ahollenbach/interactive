@@ -2,14 +2,14 @@ import ddf.minim.analysis.*;
 
 public class SpinningSquares extends AbstractSketch {
     private String name;
-    private static final int numBands = 30;
+    private static final int numBands = 10;
     private static final int alpha = 155;
 
     private Minim minim;
     private AudioInput in;
     private FFT fft;
     
-    int[][] squares = new int[numBands][];
+    float[][] squares = new float[numBands][];
 
     public SpinningSquares(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
         super(parent, width, height);
@@ -46,8 +46,8 @@ public class SpinningSquares extends AbstractSketch {
         fft.forward(in.mix);
         
         for (int i = 0; i < numBands; i++) {
-           int[] s = squares[i];
-           float size = getSize(squares[i], fft.getBand(i) * 4); 
+           float[] s = squares[i];
+           float size = getSize(squares[i], fft.getBand(i) * 6); 
            float[] x = {-1 * size/2f, size/2f, size/2f, -1 * size/2f};
            float[] y = {size/2f, size/2f, -1 * size/2f, -1 * size/2f};
            
@@ -84,11 +84,11 @@ public class SpinningSquares extends AbstractSketch {
      * 6 - The square's last size value
      * 7 - The square's last theta augment
      */
-    public int[] getSquare(float xBound, float yBound) {
+    public float[] getSquare(float xBound, float yBound) {
       int xB = Math.round(xBound);
       int yB = Math.round(yBound);
       
-      int[] square = new int[8];
+      float[] square = new float[8];
       
       square[0] = Math.round(random(xB));
       square[1] = Math.round(random(yB));
@@ -110,23 +110,24 @@ public class SpinningSquares extends AbstractSketch {
      * @param augment - the newest radius to fold into the circle array
      * @return - the radius to use.
      */
-    public float getSize(int[] square, float augment) {
+    public float getSize(float[] square, float augment) {
         float avg = (square[6] + augment) / 2f;
         square[6] = Math.round(avg);
         return avg;
     }
     
-    public void spin(int[] square) {
-      float avg = (square[2] + random(5)) / 2f;
-      square[2] += Math.round(avg); 
+    public void spin(float[] square) {
+      float avg = (square[7] + random(5)) / 2f;
+      square[2] += avg; 
+      square[7] = avg;
     }
     
-    public void rotatePoints(float[] x, float[] y, int theta, int n) {
+    public void rotatePoints(float[] x, float[] y, float theta, int n) {
         // x' = x * cos(theta) - y * sin(theta)
         // y' = x * sin(theta) + y * cos(theta)
         for(int i = 0; i < n; i++) {
-           float x_ = x[i] * cos(theta) - y[i] * sin(theta);
-           float y_ = x[i] * sin(theta) + y[i] * cos(theta);
+           float x_ = x[i] * cos(radians(theta)) - y[i] * sin(radians(theta));
+           float y_ = x[i] * sin(radians(theta)) + y[i] * cos(radians(theta));
            x[i] = x_;
            y[i] = y_;
         }
