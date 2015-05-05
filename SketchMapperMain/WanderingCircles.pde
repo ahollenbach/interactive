@@ -48,7 +48,7 @@ public class WanderingCircles extends AbstractSketch {
         for (int i = 0; i < numSamples; i++) {
            int[] c = circles[i];
            graphics.noStroke();
-           graphics.fill(c[2],c[3],c[4]);
+           graphics.fill(c[2],c[3],c[4], 180);
            float radius = getRadius(circles[i], fft.getBand(i) * 4); // fft.getBand(i) * 4;
            graphics.ellipse(c[0], c[1], radius, radius);
            wander(circles[i]);
