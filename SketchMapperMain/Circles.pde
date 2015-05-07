@@ -1,5 +1,5 @@
 // P_2_2_3_02_TABLET.pde
-// 
+//
 // This is a Generative Gestaltung piece adapted to the SketchMapper tool.
 //
 // Generative Gestaltung, ISBN: 978-3-87439-759-9
@@ -55,25 +55,17 @@ public class Circles extends AbstractSketch {
     boolean filled = false;
     boolean freeze = false;
     int mode = 0;
-    
-    private String name;
-    
-    private Minim minim;
-    private AudioInput in;
 
-    public Circles(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
+    private String name;
+
+    public Circles(final PApplet parent, String name, final int width, final int height) {
         super(parent, width, height);
 
-        this.minim = m;
-        this.in = i;
         this.name = name;
     }
-    
+
     @Override
     void setup(){
-//      int timeSize = 2048;
-//      fft = new FFT(in.bufferSize(), in.sampleRate());
-      
       graphics.beginDraw();
       graphics.background(255);
       graphics.fill(255);
@@ -92,21 +84,12 @@ public class Circles extends AbstractSketch {
 
 
     void draw(){
-//      fft.forward(in.mix);
-//      
-//      int numSamples = 30; //fft.specSize()
-//      float w = ((float)graphics.width)/numSamples;
-//      for (int i = 0; i < numSamples; i++) {
-//         graphics.rect(i*w, 0, w, fft.getBand(i) * 4);
-//         System.out.println(fft.getBand(i) * 4);
-//       }
-      
       graphics.beginDraw();
-      
+
       graphics.stroke(0, 50);
-      
+
       // get audio level
-      float lvl = gamma(in.mix.level()*1.1, 2.5);
+      float lvl = gamma(SketchMapperMain.in.mix.level()*1.1, 2.5);
       // map audio level to step size
       stepSize = map(lvl, 0,1, 1,10);
 
@@ -120,7 +103,7 @@ public class Circles extends AbstractSketch {
         y[i] += random(-stepSize,stepSize);
         // ellipse(x[i],y[i],5,5);
       }
-      
+
       graphics.strokeWeight(0.75);
       if (filled) graphics.fill(random(255));
       else graphics.noFill();
@@ -155,14 +138,13 @@ public class Circles extends AbstractSketch {
         graphics.curveVertex(x[formResolution-1]+centerX, y[formResolution-1]+centerY);
         graphics.endShape();
       }
-      
+
       graphics.endDraw();
 
     }
 
 
     void mousePressed() {
-      System.out.println(mouseX);
       // init forms on mouse position
       centerX = mouseX;
       centerY = mouseY;
@@ -200,11 +182,11 @@ public class Circles extends AbstractSketch {
     float gamma(float theValue, float theGamma) {
       return pow(theValue, theGamma);
     }
-    
+
     @Override
     public void keyEvent(KeyEvent event) {
       System.out.println("key event");
-      
+
       if (key == DELETE || key == BACKSPACE) background(255);
 
       if (key == '1') filled = false;
@@ -222,7 +204,7 @@ public class Circles extends AbstractSketch {
     public void mouseEvent(MouseEvent event) {
       // Doesn't work?
     }
-    
+
     @Override
     public String getName() {
         return this.name;

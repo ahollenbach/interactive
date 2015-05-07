@@ -1,36 +1,22 @@
-import ddf.minim.analysis.*;
-
 public class SpinningSquares extends AbstractSketch {
     private String name;
     private static final int numBands = 10;
     private static final int alpha = 155;
 
-    private Minim minim;
-    private AudioInput in;
-    private FFT fft;
-    
     float[][] squares = new float[numBands][];
 
-    public SpinningSquares(final PApplet parent, String name, final int width, final int height, Minim m, AudioInput i) {
+    public SpinningSquares(final PApplet parent, String name, final int width, final int height) {
         super(parent, width, height);
-
-        this.minim = m;
-        this.in = i;
-        this.name = name;
         
+        this.name = name;
+
         for(int j=0;j<numBands;j++) {
           squares[j] = getSquare(width, height);
         }
     }
-    
+
     @Override
     public void setup() {
-      int timeSize = 2048;
-      fft = new FFT(in.bufferSize(), in.sampleRate());
-      System.out.println("=======");
-      System.out.println(timeSize);
-      System.out.println(in.bufferSize());
-      System.out.println(in.sampleRate());
     }
 
     @Override
@@ -42,17 +28,14 @@ public class SpinningSquares extends AbstractSketch {
         graphics.scale(1, -1);
         graphics.translate(0, -graphics.height);
 
-        // Draw the equalizer
-        fft.forward(in.mix);
-        
         for (int i = 0; i < numBands; i++) {
            float[] s = squares[i];
-           float size = getSize(squares[i], fft.getBand(i) * 6); 
+           float size = getSize(squares[i], SketchMapperMain.fft.getBand(i) * 6);
            float[] x = {-1 * size/2f, size/2f, size/2f, -1 * size/2f};
            float[] y = {size/2f, size/2f, -1 * size/2f, -1 * size/2f};
-           
+
            rotatePoints(x, y, s[2], 4);
-           
+
            PShape square = createShape();
            square.beginShape();
            square.noStroke();
@@ -60,18 +43,18 @@ public class SpinningSquares extends AbstractSketch {
            for(int j = 0; j < 4; j++)
              square.vertex(x[j] + s[0], y[j] + s[1]);
            square.endShape(CLOSE);
-           
+
            shape(square);
-           
+
            spin(squares[i]);
          }
-         
-        
+
+
         //graphics.rect(0, 0, graphics.width, graphics.height*in.mix.level()*4);
 
         graphics.endDraw();
     }
-    
+
     /**
      * Because we couldn't figure out why we were getting compiler errors on the circle object (I blame Andrew)
      * we're just working with an array of circle parameters. The order is as follows:
@@ -87,9 +70,9 @@ public class SpinningSquares extends AbstractSketch {
     public float[] getSquare(float xBound, float yBound) {
       int xB = Math.round(xBound);
       int yB = Math.round(yBound);
-      
+
       float[] square = new float[8];
-      
+
       square[0] = Math.round(random(xB));
       square[1] = Math.round(random(yB));
       square[2] = 0;
@@ -98,10 +81,10 @@ public class SpinningSquares extends AbstractSketch {
       square[5] = Math.round(random(255));
       square[6] = 0;
       square[7] = 0;
-      
+
       return square;
     }
-    
+
     /**
      * So my main goal with this one is to keep an estimate of the last radius value in memory
      * and use it in tandem with the live value to prevent more aggressive jumps. Hopefully this
@@ -115,13 +98,13 @@ public class SpinningSquares extends AbstractSketch {
         square[6] = Math.round(avg);
         return avg;
     }
-    
+
     public void spin(float[] square) {
       float avg = (square[7] + random(5)) / 2f;
-      square[2] += avg; 
+      square[2] += avg;
       square[7] = avg;
     }
-    
+
     public void rotatePoints(float[] x, float[] y, float theta, int n) {
         // x' = x * cos(theta) - y * sin(theta)
         // y' = x * sin(theta) + y * cos(theta)
@@ -140,9 +123,9 @@ public class SpinningSquares extends AbstractSketch {
 
     @Override
     public void mouseEvent(MouseEvent event) {
-      
+
     }
-    
+
     @Override
     public String getName() {
         return this.name;
