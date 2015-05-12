@@ -48,22 +48,27 @@ public class Repulse extends AbstractSketch {
 
   void draw()
   {
+    SketchMapperMain.beat.detect(SketchMapperMain.in.mix);
+    if ( SketchMapperMain.beat.isOnset() ) {
+      //reset();
+    }
+    
     graphics.beginDraw();
     graphics.background(0);
     
     // Set the point to disturb
-    int numSamples = 30; //fft.specSize()
-    float w = ((float)graphics.width)/numSamples;
+    //int numSamples = 30; //fft.specSize()
+    float w = ((float)graphics.width)/SketchMapperMain.numSamples;
         
     float max = 0;
     int maxIdx = 0;
-    for (int i = 0; i < numSamples; i++) {
+    for (int i = 0; i < SketchMapperMain.numSamples; i++) {
        if (SketchMapperMain.fft.getBand(i) > max) {
          max = SketchMapperMain.fft.getBand(i);
          maxIdx = i;
        }
     }
-    PVector pos = new PVector(maxIdx*w/*-graphics.width/2*/, max*4/*-graphics.height/2*/, 0);
+    PVector pos = new PVector(maxIdx*w/*-graphics.width/2*/, max*3+graphics.height/4, 0);
     float d = PVector.dist(LastTouchPoint, pos);
     LastTouchPoint.set((LastTouchPoint.x+pos.x)/2/*+graphics.width/2*/, (LastTouchPoint.y+pos.y)/2/*+graphics.height/2*/, 0);
     
@@ -94,7 +99,11 @@ public class Repulse extends AbstractSketch {
     for (Triangle t : myTriangles)
     {//rgb(28, 69, 135)
     //240,202,65
-      if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, 28, 240), map(t.p1.y, 0, graphics.height, 69, 202), map(t.p1.y, 0, graphics.height, 135, 65));
+      // blue to yellow (rainbow)
+      //if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, 28, 240), map(t.p1.y, 0, graphics.height, 69, 202), map(t.p1.y, 0, graphics.height, 135, 65));
+      
+      // blue
+      if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, 28, 100), map(t.p1.y, 0, graphics.height, 69, 140), map(t.p1.y, 0, graphics.height, 135, 170));
       graphics.vertex(t.p1.x, t.p1.y);
       graphics.vertex(t.p2.x, t.p2.y);
       graphics.vertex(t.p3.x, t.p3.y);
@@ -119,6 +128,10 @@ public class Repulse extends AbstractSketch {
     
     graphics.endDraw();
   }
+  
+  // easeInOutQuint
+  //float ease(t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t };
+
 
   void mouseClicked()
   {

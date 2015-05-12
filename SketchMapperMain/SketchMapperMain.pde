@@ -10,6 +10,7 @@ private SketchMapper sketchMapper;
 // Make all these available to the sketches, so we process once
 public static Minim minim;
 public static AudioInput in;
+public static BeatDetect beat;
 public static FFT fft;
 public static int numSamples;
 
@@ -23,6 +24,9 @@ public void setup() {
   minim = new Minim(this);
   // use the getLineIn method of the Minim object to get an AudioInput
   in = minim.getLineIn();
+
+  beat = new BeatDetect();
+  beat.setSensitivity(50);
 
   // Set up FFT
   fft = new FFT(in.bufferSize(), in.sampleRate());
