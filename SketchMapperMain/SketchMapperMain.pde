@@ -11,6 +11,7 @@ private SketchMapper sketchMapper;
 public static Minim minim;
 public static AudioInput in;
 public static FFT fft;
+public static int numSamples;
 
 public void setup() {
   size(displayWidth, displayHeight, OPENGL);
@@ -25,7 +26,8 @@ public void setup() {
 
   // Set up FFT
   fft = new FFT(in.bufferSize(), in.sampleRate());
-  //fft.logAverages(11,12);
+  fft.logAverages(11,12);
+  numSamples = 8*11;
 
 
   // And lastly, set up SketchMapper
@@ -39,7 +41,7 @@ public void setup() {
   sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2));
   sketchMapper.addSketch(new WanderingCircles(this, "WanderingCircles", width / 2, height / 2));
   sketchMapper.addSketch(new SpinningSquares(this, "Spinning Squares", width / 2, height / 2));
-
+  sketchMapper.addSketch(new Repulse(this, "Repulse", width / 2, height / 2));
 }
 
 public void draw() {

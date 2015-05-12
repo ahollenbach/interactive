@@ -24,10 +24,9 @@ public class Equalizer extends AbstractSketch {
         graphics.translate(0, -graphics.height);
 
         // Draw the equalizer
-        int numSamples = 11*8; //fft.specSize()
-        float w = ((float)graphics.width)/numSamples;
+        float w = ((float)graphics.width)/SketchMapperMain.numSamples;
         for (int i = 0; i < numSamples; i++) {
-           graphics.rect(i*w, 0, w, SketchMapperMain.fft.getBand(i) * 8);
+           graphics.rect(i*w, 0, w, SketchMapperMain.fft.getBand(i) * 4);
          }
 
 
