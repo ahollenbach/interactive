@@ -7,7 +7,7 @@ This project has a few dependencies before we can get started.
 
 First, install [Processing](https://processing.org/download/?processing). This has been tested with Processing 2.2.1. 
 
-Once you install Processing, you need to install [SketchMapper](https://github.com/josephtaylor/sketch-mapper), which is a system that allows us to map our content (Processing sketches, video, images) to surfaces. The instructions for installation can be found in that repository.
+Once you install Processing, you need to install our custom fork of [SketchMapper](https://github.com/ahollenbach/sketch-mapper), which is a system that allows us to map our content (Processing sketches, video, images) to surfaces. The instructions for installation can be found in that repository.
 
 Once SketchMapper is installed, (the ```target``` directory has been copied to your Processing library folder), we need to install [Generative Gestaltung](http://www.generative-gestaltung.de/code#library), a library/series of beautiful visualizations that we're using (at least for testing). Download the _Generative Design Library_. You'll also need to grab a few of the dependencies. _ControlP5_ is already provided by SketchMapper, so don't install that, but _Geomerative_ and _treemap_ may be necessary, depending on the visualizations used. To install these libraries, drag them to ```<Processing_Directory>/libraries``` (as you did for SketchMapper).
 
