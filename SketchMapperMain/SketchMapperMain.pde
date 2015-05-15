@@ -6,6 +6,7 @@ import ddf.minim.*;
 import ddf.minim.analysis.*;
 
 private SketchMapper sketchMapper;
+private int[] curSurfaceId;
 
 // Make all these available to the sketches, so we process once
 public static Minim minim;
@@ -19,12 +20,14 @@ public void setup() {
   if (frame != null) {
     frame.setResizable(true);
   }
+  
+  curSurfaceId = new int[20]; // no more than 20 surfaces! TODO no.
 
   // Set up audio processing
   minim = new Minim(this);
   // use the getLineIn method of the Minim object to get an AudioInput
   in = minim.getLineIn();
-
+  
   beat = new BeatDetect();
   beat.setSensitivity(50);
 
@@ -55,3 +58,21 @@ public void draw() {
 
   sketchMapper.draw();
 }
+
+public void keyPressed(KeyEvent event) {
+  // if we click a number button, it corresponds to that surface and cycles
+  if (event.getKeyCode() >= 48 && event.getKeyCode() <= 57) {
+    int i = event.getKeyCode() - 48;
+    
+    // Don't accept if we don't have a surface
+    if(i >= sketchMapper.getSurfaces().size()) return;
+    
+    System.out.println(i + " " + curSurfaceId[i]);
+    // gets the ith surface (the number we clicked), and moves to the next sketch in the list.
+    curSurfaceId[i] = (curSurfaceId[i] + 1)%sketchMapper.getSketchList().size();
+    System.out.println(curSurfaceId[i]);
+    sketchMapper.getSurfaces().get(i).setSketch(sketchMapper.getSketchList().get(curSurfaceId[i]));
+  }
+}
+
+
