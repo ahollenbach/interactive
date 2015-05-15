@@ -55,6 +55,12 @@ public class Circles extends AbstractSketch {
     boolean filled = false;
     boolean freeze = false;
     int mode = 0;
+    
+    // change directions
+    float targetX = 0;
+    float targetY = 0;
+    int countdown = 0;
+    float lastLvl = 0;
 
     private String name;
 
@@ -62,6 +68,7 @@ public class Circles extends AbstractSketch {
         super(parent, width, height);
 
         this.name = name;
+        
     }
 
     @Override
@@ -89,14 +96,27 @@ public class Circles extends AbstractSketch {
       graphics.stroke(0, 50);
 
       // get audio level
-      float lvl = map(SketchMapperMain.in.mix.level()*3,0,2,0,1);
-      float lvlGamma = gamma(SketchMapperMain.in.mix.level()*1.1, 2.5);
+      float lvl = map(SketchMapperMain.in.mix.level(),0,1,0,3);
+      lvl = (lastLvl + lvl) / 2; // smoothing
+      float lvlGamma = gamma(SketchMapperMain.in.mix.level()*1.1, 1.2);
       // map audio level to step size
-      stepSize = map(lvlGamma, 0,1, 1,4);
+      stepSize = map(lvlGamma, 0,1, 1,1.5);
 
       // floating towards mouse position
-      centerX += random(-lvl*displayWidth/2,lvl*displayWidth/2) * 0.01;
-      centerY += random(-lvl*displayHeight/2,lvl*displayHeight/2) * 0.01;
+      if(countdown == 0) {
+        targetX = random(0,displayWidth/2);
+        targetY = random(0,displayHeight/2);
+        countdown = (int)random(20,50);
+        
+        // move a little bit with smoothing, then add a base movement speed
+        centerX += (targetX-centerX) * lvl * 0.02 + ((int) Math.signum(targetX-centerX)) * 0.2;
+        centerY += (targetY-centerY) * lvl * 0.02 + ((int) Math.signum(targetY-centerY)) * 0.2;
+      } else {
+        countdown--;
+        
+        centerX += (targetX-centerX) * lvl * 0.02 + ((int) Math.signum(targetX-centerX)) * 0.2;
+        centerY += (targetY-centerY) * lvl * 0.02 + ((int) Math.signum(targetX-centerX)) * 0.2;
+      }
 
       // calculate new points
       for (int i=0; i<formResolution; i++){
