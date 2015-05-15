@@ -47,7 +47,7 @@ public class Circles extends AbstractSketch {
 
     int formResolution = 15;
     float stepSize = 2;
-    float initRadius = 150;
+    float initRadius = 100;
     float centerX, centerY;
     float[] x = new float[formResolution];
     float[] y = new float[formResolution];
@@ -89,13 +89,14 @@ public class Circles extends AbstractSketch {
       graphics.stroke(0, 50);
 
       // get audio level
-      float lvl = gamma(SketchMapperMain.in.mix.level()*1.1, 2.5);
+      float lvl = map(SketchMapperMain.in.mix.level()*3,0,2,0,1);
+      float lvlGamma = gamma(SketchMapperMain.in.mix.level()*1.1, 2.5);
       // map audio level to step size
-      stepSize = map(lvl, 0,1, 1,10);
+      stepSize = map(lvlGamma, 0,1, 1,4);
 
       // floating towards mouse position
-      centerX += (mouseX-centerX) * 0.01;
-      centerY += (mouseY-centerY) * 0.01;
+      centerX += random(-lvl*displayWidth/2,lvl*displayWidth/2) * 0.01;
+      centerY += random(-lvl*displayHeight/2,lvl*displayHeight/2) * 0.01;
 
       // calculate new points
       for (int i=0; i<formResolution; i++){
@@ -145,6 +146,7 @@ public class Circles extends AbstractSketch {
 
 
     void mousePressed() {
+      /*
       // init forms on mouse position
       centerX = mouseX;
       centerY = mouseY;
@@ -175,7 +177,7 @@ public class Circles extends AbstractSketch {
           x[i] = lerp(x1, x2, i/(float)formResolution);
           y[i] = lerp(y1, y2, i/(float)formResolution);
         }
-      }
+      }*/
     }
 
     // gamma ramp, non linear mapping ...
@@ -185,17 +187,13 @@ public class Circles extends AbstractSketch {
 
     @Override
     public void keyEvent(KeyEvent event) {
-      System.out.println("key event");
-
       if (key == DELETE || key == BACKSPACE) background(255);
 
-      if (key == '1') filled = false;
-      if (key == '2') filled = true;
-      if (key == '3') mode = 0;
-      if (key == '4') mode = 1;
+      if (key == 'f') filled = !filled; // flip filled/not-filled
+      if (key == 'm') mode = ++mode%2;  // flip mode between 0 and 1
 
       // switch draw loop on/off
-      if (key == 'f' || key == 'F') freeze = !freeze;
+      //if (key == 'f' || key == 'F') freeze = !freeze;
       if (freeze == true) noLoop();
       else loop();
     }
