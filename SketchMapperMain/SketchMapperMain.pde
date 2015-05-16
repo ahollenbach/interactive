@@ -43,18 +43,21 @@ public void setup() {
   // Add different sketch options
   sketchMapper.addSketch(new Levelizer(this, "Levelizer - Yellow", width / 2, height / 2, color(240,242,166)));
   sketchMapper.addSketch(new Levelizer(this, "Levelizer - Pink", width / 2, height / 2, color(224,222,250)));
+  sketchMapper.addSketch(new BassDrum(this, "Bass Drum - Pink", width / 2, height / 2, color(224,222,250)));
   sketchMapper.addSketch(new Equalizer(this, "Equalizer - Pink", width / 2, height / 2, color(224,222,250)));
   sketchMapper.addSketch(new Circles(this, "Circles", width / 2, height / 2));
   sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2));
   sketchMapper.addSketch(new WanderingCircles(this, "WanderingCircles", width / 2, height / 2));
   sketchMapper.addSketch(new SpinningSquares(this, "Spinning Squares", width / 2, height / 2));
-  sketchMapper.addSketch(new Repulse(this, "Repulse", width / 2, height / 2));
+  sketchMapper.addSketch(new Repulse(this, "Repulse - Blue", width / 2, height / 2, new int[]{28,100,69,140,135,170}));
+  sketchMapper.addSketch(new Repulse(this, "Repulse - Blue/Yellow", width / 2, height / 2, new int[]{28,240,69,202,135,65}));
 }
 
 public void draw() {
   // Process the audio for this cycle
   // This way each sketch does not have to track its own FFT
   fft.forward(in.mix);
+  SketchMapperMain.beat.detect(SketchMapperMain.in.mix);
 
   sketchMapper.draw();
 }

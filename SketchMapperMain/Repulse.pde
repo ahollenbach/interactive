@@ -18,11 +18,13 @@ public class Repulse extends AbstractSketch {
   final int NB_POINTS = 105;
   Boolean displayPoints = false, displayLines = false, fillUp = true;
   PVector LastTouchPoint = new PVector(0, 0, 0);
+  int[] cs;
 
-  public Repulse(final PApplet parent, String name, final int width, final int height) {
+  public Repulse(final PApplet parent, String name, final int width, final int height, int[] colors) {
         super(parent, width, height);
 
         this.name = name;
+        this.cs = colors;
     }
 
   void setup()
@@ -48,7 +50,7 @@ public class Repulse extends AbstractSketch {
 
   void draw()
   {
-    SketchMapperMain.beat.detect(SketchMapperMain.in.mix);
+    
     if ( SketchMapperMain.beat.isOnset() ) {
       //reset();
     }
@@ -97,13 +99,10 @@ public class Repulse extends AbstractSketch {
 
     graphics.beginShape(TRIANGLES);
     for (Triangle t : myTriangles)
-    {//rgb(28, 69, 135)
-    //240,202,65
-      // blue to yellow (rainbow)
-      //if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, 28, 240), map(t.p1.y, 0, graphics.height, 69, 202), map(t.p1.y, 0, graphics.height, 135, 65));
-      
-      // blue
-      if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, 28, 100), map(t.p1.y, 0, graphics.height, 69, 140), map(t.p1.y, 0, graphics.height, 135, 170));
+    {
+      //rgb(28, 69, 135)
+      //240,202,65
+      if (fillUp) graphics.fill(map(t.p1.x, 0, graphics.width, cs[0], cs[1]), map(t.p1.y, 0, graphics.height, cs[2], cs[3]), map(t.p1.y, 0, graphics.height, cs[4], cs[5]));
       graphics.vertex(t.p1.x, t.p1.y);
       graphics.vertex(t.p2.x, t.p2.y);
       graphics.vertex(t.p3.x, t.p3.y);
