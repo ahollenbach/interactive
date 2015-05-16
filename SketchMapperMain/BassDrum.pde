@@ -2,9 +2,6 @@ public class BassDrum extends AbstractSketch {
     private int curColor;
     private String name;
 
-    private Minim minim;
-    private AudioInput in;
-
     public BassDrum(final PApplet parent, String name, final int width, final int height, int colr) {
         super(parent, width, height);
 
