@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectionMap>
+  <surface horizontalForce="0" id="0" lock="false" name="0" res="6" sketch="Equalizer - Pink" type="0" verticalForce="0">
+    <cornerpoint i="0" x="341.0" y="495.0"/>
+    <cornerpoint i="1" x="1027.0" y="482.0"/>
+    <cornerpoint i="2" x="1013.0" y="577.0"/>
+    <cornerpoint i="3" x="348.0" y="592.0"/>
+  </surface>
+  <surface horizontalForce="0" id="1" lock="false" name="1" res="6" sketch="Bass Drum - Pink" type="1" verticalForce="0">
+    <cornerpoint i="0" x="557.0" y="712.0"/>
+    <cornerpoint i="1" x="800.0" y="706.0"/>
+    <cornerpoint i="2" x="743.0" y="994.0"/>
+    <cornerpoint i="3" x="611.0" y="992.0"/>
+    <bezierpoint i="0" x="536.0" y="739.0"/>
+    <bezierpoint i="1" x="666.0" y="593.0"/>
+    <bezierpoint i="2" x="766.0" y="679.0"/>
+    <bezierpoint i="3" x="914.0" y="862.0"/>
+    <bezierpoint i="4" x="776.0" y="976.0"/>
+    <bezierpoint i="5" x="721.0" y="1007.0"/>
+    <bezierpoint i="6" x="625.0" y="1014.0"/>
+    <bezierpoint i="7" x="445.0" y="890.0"/>
+  </surface>
+  <surface horizontalForce="0" id="2" lock="false" name="2" res="6" sketch="Repulse - Blue" type="0" verticalForce="0">
+    <cornerpoint i="0" x="348.0" y="592.0"/>
+    <cornerpoint i="1" x="443.0" y="595.0"/>
+    <cornerpoint i="2" x="449.0" y="1021.0"/>
+    <cornerpoint i="3" x="355.0" y="1023.0"/>
+  </surface>
+  <surface horizontalForce="0" id="3" lock="false" name="3" res="6" sketch="Repulse - Blue/Yellow" type="0" verticalForce="0">
+    <cornerpoint i="0" x="921.0" y="580.0"/>
+    <cornerpoint i="1" x="1013.0" y="579.0"/>
+    <cornerpoint i="2" x="981.0" y="1023.0"/>
+    <cornerpoint i="3" x="901.0" y="1016.0"/>
+  </surface>
+  <surface horizontalForce="0" id="4" lock="false" name="4" res="6" sketch="WanderingCircles" type="0" verticalForce="0">
+    <cornerpoint i="0" x="7.0" y="110.0"/>
+    <cornerpoint i="1" x="945.0" y="155.0"/>
+    <cornerpoint i="2" x="944.0" y="479.0"/>
+    <cornerpoint i="3" x="11.0" y="486.0"/>
+  </surface>
+</ProjectionMap>
