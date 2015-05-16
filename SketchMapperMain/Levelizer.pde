@@ -23,7 +23,7 @@ public class Levelizer extends AbstractSketch {
         graphics.translate(0, -graphics.height);
 
         // Draw the equalizer
-        graphics.rect(0, 0, graphics.width, graphics.height*SketchMapperMain.in.mix.level()*4);
+        graphics.rect(0, 0, graphics.width, graphics.height*SketchMapperMain.in.mix.level()*1.5);
 
         graphics.endDraw();
     }
