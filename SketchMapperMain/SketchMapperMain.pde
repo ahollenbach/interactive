@@ -50,7 +50,6 @@ public void setup() {
   sketchMapper.addSketch(new BassDrum(this, "Bass Drum - Pink", width / 2, height / 2, color(224,222,250)));
   sketchMapper.addSketch(new Equalizer(this, "Equalizer - Pink", width / 2, height / 2, color(224,222,250)));
   sketchMapper.addSketch(new Circles(this, "Circles", width / 2, height / 2));
-  sketchMapper.addSketch(new Wanderers(this, "Wanderers", width / 2, height / 2));
   sketchMapper.addSketch(new WanderingCircles(this, "WanderingCircles", width / 2, height / 2));
   sketchMapper.addSketch(new SpinningSquares(this, "Spinning Squares", width / 2, height / 2));
   sketchMapper.addSketch(new Repulse(this, "Repulse - Blue", width / 2, height / 2, new int[]{28,100,69,140,135,170}));
