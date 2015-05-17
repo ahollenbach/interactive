@@ -18,6 +18,9 @@ public static BeatDetect beat;
 public static FFT fft;
 public static int numSamples;
 
+boolean isCtrlPressed = false;
+static boolean hideAllOutput = false;
+
 public ArrayList<Movie> videos;
 
 public void setup() {
@@ -104,6 +107,12 @@ public void draw() {
 }
 
 public void keyPressed(KeyEvent event) {
+  if (event.getKey() == 'p') {
+    hideAllOutput = !hideAllOutput;
+  }
+  System.out.println(event.getKeyCode());
+  if (event.getKeyCode() == 17 && isCtrlPressed == false) isCtrlPressed = true;
+  
   // run once, if unset
   // TODO check whether are entering render or no
   if(surfaceBounds[0][0] == 0) {
@@ -116,6 +125,13 @@ public void keyPressed(KeyEvent event) {
     
     // Don't accept if we don't have a surface for it
     if(i >= sketchMapper.getSurfaces().size()) return;
+    
+    if(isCtrlPressed) {
+      // toggle visibility of surface
+      AbstractSketch s = (AbstractSketch) sketchMapper.getSketchList().get(sketchOnSurface[i]);
+      s.hideOutput = !s.hideOutput;
+      return;
+    }
     
     // gets the ith surface (the number we clicked), and moves to the next sketch in the list.
     sketchMapper.getSketchList().get(sketchOnSurface[i]).unfocus(); // notify that a sketch is being hidden. Super important for performance with video.
@@ -133,6 +149,10 @@ public void keyPressed(KeyEvent event) {
       s.setDimensions(surfaceBounds[i][0],surfaceBounds[i][1]);
     }
   }
+}
+
+void keyReleased(Event event) {
+  if (keyCode == 17 && isCtrlPressed == true) isCtrlPressed = false;
 }
 
 public void setSurfaceRatios() {

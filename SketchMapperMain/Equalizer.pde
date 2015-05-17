@@ -17,6 +17,13 @@ public class Equalizer extends AbstractSketch {
 
     @Override
     public void draw() {
+      if(hideOutput || SketchMapperMain.hideAllOutput) {
+        graphics.beginDraw();
+        graphics.background(0);
+        graphics.endDraw();
+        return;
+      }
+      
         graphics.beginDraw();
         graphics.background(0);
         graphics.fill(curColor);

@@ -92,6 +92,13 @@ public class Circles extends AbstractSketch {
 
 
     void draw(){
+      if(hideOutput || SketchMapperMain.hideAllOutput) {
+        graphics.beginDraw();
+        graphics.background(0);
+        graphics.endDraw();
+        return;
+      }
+      
       graphics.beginDraw();
 
       graphics.stroke(0, 50);

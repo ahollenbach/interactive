@@ -50,8 +50,14 @@ public class Repulse extends AbstractSketch {
     }
   }
 
-  void draw()
-  {
+  void draw() {
+    if(hideOutput || SketchMapperMain.hideAllOutput) {
+        graphics.beginDraw();
+        graphics.background(0);
+        graphics.endDraw();
+        return;
+      }
+      
     
     if ( SketchMapperMain.beat.isOnset() ) {
       //reset();

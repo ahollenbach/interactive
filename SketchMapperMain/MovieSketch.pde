@@ -30,6 +30,13 @@ public class MovieSketch extends AbstractSketch {
 
     @Override
     public void draw() {
+      if(hideOutput || SketchMapperMain.hideAllOutput) {
+        graphics.beginDraw();
+        graphics.background(0);
+        graphics.endDraw();
+        return;
+      }
+      
         if(!init) focus();
       
         graphics.beginDraw();
