@@ -11,6 +11,7 @@ http://creativecommons.org/licenses/GPL/2.0/
 
 public class Repulse extends AbstractSketch {
   private String name;
+  private float scaling;
 
   ArrayList<Triangle> myTriangles = new ArrayList<Triangle>();
   ArrayList<MyPoint> myPoints = new ArrayList<MyPoint>();
@@ -20,11 +21,12 @@ public class Repulse extends AbstractSketch {
   PVector LastTouchPoint = new PVector(0, 0, 0);
   int[] cs;
 
-  public Repulse(final PApplet parent, String name, final int width, final int height, int[] colors) {
+  public Repulse(final PApplet parent, String name, final int width, final int height, float scaling, int[] colors) {
         super(parent, width, height);
 
         this.name = name;
         this.cs = colors;
+        this.scaling = scaling;
     }
 
   void setup()
@@ -70,7 +72,7 @@ public class Repulse extends AbstractSketch {
          maxIdx = i;
        }
     }
-    PVector pos = new PVector(maxIdx*w/*-graphics.width/2*/, max*3+graphics.height/4, 0);
+    PVector pos = new PVector(maxIdx*w/*-graphics.width/2*/, max*scaling+graphics.height/4, 0);
     float d = PVector.dist(LastTouchPoint, pos);
     LastTouchPoint.set((LastTouchPoint.x+pos.x)/2/*+graphics.width/2*/, (LastTouchPoint.y+pos.y)/2/*+graphics.height/2*/, 0);
     

@@ -1,12 +1,14 @@
 public class Equalizer extends AbstractSketch {
     private int curColor;
     private String name;
+    private float scaling;
 
-    public Equalizer(final PApplet parent, String name, final int width, final int height, int colr) {
+    public Equalizer(final PApplet parent, String name, final int width, final int height, float scaling, int colr) {
         super(parent, width, height);
 
         this.curColor = colr;
         this.name = name;
+        this.scaling = scaling;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class Equalizer extends AbstractSketch {
         // Draw the equalizer
         float w = ((float)graphics.width)/SketchMapperMain.numSamples;
         for (int i = 0; i < numSamples; i++) {
-           graphics.rect(i*w, 0, w, SketchMapperMain.fft.getBand(i) * 4);
+           graphics.rect(i*w, 0, w, SketchMapperMain.fft.getBand(i) * scaling);
          }
 
 

@@ -1,12 +1,14 @@
 public class BassDrum extends AbstractSketch {
     private int curColor;
     private String name;
+    private float scaling;
 
-    public BassDrum(final PApplet parent, String name, final int width, final int height, int colr) {
+    public BassDrum(final PApplet parent, String name, final int width, final int height, float scaling, int colr) {
         super(parent, width, height);
 
         this.curColor = colr;
         this.name = name;
+        this.scaling = scaling;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class BassDrum extends AbstractSketch {
           bandVal += SketchMapperMain.fft.getBand(i);
         }
         bandVal = bandVal/3; // get avg
-        bandVal = bandVal/60; // scale
+        bandVal = bandVal*scaling; // scale
         float w = graphics.width*bandVal;
         float h = graphics.height*bandVal;
         //graphics.rect(graphics.width/2-w/2, graphics.height/2-h/2, w, h);

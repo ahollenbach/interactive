@@ -63,12 +63,13 @@ public class Circles extends AbstractSketch {
     float lastLvl = 0;
 
     private String name;
+    private float scaling;
 
-    public Circles(final PApplet parent, String name, final int width, final int height) {
+    public Circles(final PApplet parent, String name, final int width, final int height, float scaling) {
         super(parent, width, height);
 
         this.name = name;
-        
+        this.scaling = scaling;
     }
 
     @Override
@@ -96,7 +97,8 @@ public class Circles extends AbstractSketch {
       graphics.stroke(0, 50);
 
       // get audio level
-      float lvl = map(SketchMapperMain.in.mix.level(),0,1,0,3);
+      //float lvl = map(SketchMapperMain.in.mix.level(),0,1,0,3);
+      float lvl = SketchMapperMain.in.mix.level()*scaling;
       lvl = (lastLvl + lvl) / 2; // smoothing
       float lvlGamma = gamma(SketchMapperMain.in.mix.level()*1.1, 1.2);
       // map audio level to step size

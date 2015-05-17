@@ -1,14 +1,16 @@
 public class SpinningSquares extends AbstractSketch {
     private String name;
+    private float scaling;
     private static final int numBands = 10;
     private static final int alpha = 155;
 
     float[][] squares = new float[numBands][];
 
-    public SpinningSquares(final PApplet parent, String name, final int width, final int height) {
+    public SpinningSquares(final PApplet parent, String name, final int width, final int height, float scaling) {
         super(parent, width, height);
         
         this.name = name;
+        this.scaling = scaling;
 
         for(int j=0;j<numBands;j++) {
           squares[j] = getSquare(width, height);
@@ -30,7 +32,7 @@ public class SpinningSquares extends AbstractSketch {
 
         for (int i = 0; i < numBands; i++) {
            float[] s = squares[i];
-           float size = getSize(squares[i], SketchMapperMain.fft.getBand(i) * 6);
+           float size = getSize(squares[i], SketchMapperMain.fft.getBand(i) * scaling);
            float[] x = {-1 * size/2f, size/2f, size/2f, -1 * size/2f};
            float[] y = {size/2f, size/2f, -1 * size/2f, -1 * size/2f};
 

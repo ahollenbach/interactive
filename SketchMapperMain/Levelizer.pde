@@ -1,12 +1,14 @@
 public class Levelizer extends AbstractSketch {
     private int curColor;
     private String name;
+    private float scaling;
 
-    public Levelizer(final PApplet parent, String name, final int width, final int height, int colr) {
+    public Levelizer(final PApplet parent, String name, final int width, final int height, float scaling, int colr) {
         super(parent, width, height);
 
         this.curColor = colr;
         this.name = name;
+        this.scaling = scaling;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class Levelizer extends AbstractSketch {
         graphics.translate(0, -graphics.height);
 
         // Draw the equalizer
-        graphics.rect(0, 0, graphics.width, graphics.height*SketchMapperMain.in.mix.level()*1.5);
+        graphics.rect(0, 0, graphics.width, graphics.height*SketchMapperMain.in.mix.level()*scaling);
 
         graphics.endDraw();
     }

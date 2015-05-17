@@ -1,12 +1,14 @@
 public class WanderingCircles extends AbstractSketch {
     private String name;
+    private float scaling;
 
     int[][] circles = new int[30][];
 
-    public WanderingCircles(final PApplet parent, String name, final int width, final int height) {
+    public WanderingCircles(final PApplet parent, String name, final int width, final int height, float scaling) {
         super(parent, width, height);
 
         this.name = name;
+        this.scaling = scaling;
 
         for(int j=0;j<30;j++) {
           circles[j] = getCircle(width, height);
@@ -34,7 +36,7 @@ public class WanderingCircles extends AbstractSketch {
            int[] c = circles[i];
            graphics.noStroke();
            graphics.fill(c[2],c[3],c[4], 180);
-           float radius = getRadius(circles[i], SketchMapperMain.fft.getBand(i) * 4);
+           float radius = getRadius(circles[i], SketchMapperMain.fft.getBand(i) * scaling);
            graphics.ellipse(c[0], c[1], radius, radius);
            wander(circles[i]);
          }
