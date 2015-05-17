@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectionMap>
+  <surface horizontalForce="0" id="0" lock="false" name="0" res="6" sketch="WanderingCircles" type="0" verticalForce="0">
+    <cornerpoint i="0" x="423.0" y="329.0"/>
+    <cornerpoint i="1" x="748.0" y="455.0"/>
+    <cornerpoint i="2" x="757.0" y="990.0"/>
+    <cornerpoint i="3" x="421.0" y="797.0"/>
+  </surface>
+  <surface horizontalForce="0" id="1" lock="false" name="1" res="6" sketch="Movie - Color Circles.mp4" type="0" verticalForce="0">
+    <cornerpoint i="0" x="748.0" y="455.0"/>
+    <cornerpoint i="1" x="1154.0" y="198.0"/>
+    <cornerpoint i="2" x="1138.0" y="517.0"/>
+    <cornerpoint i="3" x="757.0" y="990.0"/>
+  </surface>
+  <surface horizontalForce="0" id="2" lock="false" name="2" res="6" sketch="Movie - clouds3.MOV" type="0" verticalForce="0">
+    <cornerpoint i="0" x="423.0" y="329.0"/>
+    <cornerpoint i="1" x="837.0" y="133.0"/>
+    <cornerpoint i="2" x="1154.0" y="198.0"/>
+    <cornerpoint i="3" x="748.0" y="455.0"/>
+  </surface>
+</ProjectionMap>
