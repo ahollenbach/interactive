@@ -68,7 +68,6 @@ public void setup() {
   sketches.put("Spinning Squares",   new SpinningSquares (this, "Spinning Squares",   width/2, height/2, 6      ));
   sketches.put("Repulse - Blue",     new Repulse         (this, "Repulse - Blue",     width/2, height/2, 3,     new int[]{28,100,69,140,135,170}));
   sketches.put("Repulse - Rainbow",  new Repulse         (this, "Repulse - Rainbow",  width/2, height/2, 3,     new int[]{28,240,69,202,135,65}));
-  System.out.println(sketches.get("Repulse - Blue"));
   
   // Add them to sketchMapper
   Iterator it = sketches.entrySet().iterator();
@@ -77,13 +76,31 @@ public void setup() {
       sketchMapper.addSketch((AbstractSketch)pair.getValue());
   }
   
+  loadSurfaceQueues();
+}
+
+public void loadSurfaceQueues() {
   queue = new String[10][];
-  queue[0] = new String[]{"Repulse - Blue","1shadow","9sand"};
-  queue[1] = new String[]{"5Clouds","WanderingCircles"};
-  
   queueIt = new int[10];
   
-  for(int i=0;i<2;i++) {
+  
+//  queue[0] = new String[]{"Repulse - Blue","1shadow","9sand"};
+//  queue[1] = new String[]{"5Clouds","WanderingCircles"};
+  
+//  queue[0] = new String[]{};
+//  queue[1] = new String[]{};
+//  queue[2] = new String[]{};
+//  queue[3] = new String[]{};
+//  queue[4] = new String[]{"7underwater", "3shadow", "4shadow"};
+//  queue[5] = new String[]{"9sand", "12Underwater", "10underwater_ripples"};
+  
+  queue[0] = new String[]{"14Color Circles"};
+  queue[1] = new String[]{"5Clouds", "6Floating fire", "11Gold_Box"};
+  queue[2] = new String[]{"15Hand Shadow"};
+  queue[3] = new String[]{"2shadow"};
+  queue[4] = new String[]{"10underwater_ripples", "13blackink"};
+  
+  for(int i=0;i<5;i++) { // TODO not hardcode this value
     sketchOnSurface[i] = sketches.get(queue[i][0]);
   }
 }
@@ -93,7 +110,6 @@ public void loadVideos(SketchMapper sketchMapper) {
   String[] imageTypes = {"jpg","jpeg","png","gif","bmp"};
   String[] movieTypes = {"mp4","mov","avi"};
   
-  // sketchPath + "/data/videos"
   File file = new File(sketchPath + "/data/videos");
   File[] files = file.listFiles();
   
@@ -173,15 +189,9 @@ public void keyPressed(KeyEvent event) {
     
     // Set dimensions for the sketch given the surface dimensions
     AbstractSketch s = sketchOnSurface[i];
-    s.setDimensions(surfaceBounds[i][0],surfaceBounds[i][1]);
     s.focus();
   } else if(event.getKey() == ' ') {
-    // TODO tmp fix to set bounds for everything
-    // Set dimensions for the sketch given the surface dimensions
-    for(int i=0;i<10;i++) {
-      AbstractSketch s = sketchOnSurface[i];
-      s.setDimensions(surfaceBounds[i][0],surfaceBounds[i][1]);
-    }
+    setSurfaceRatios();
   }
 }
 
@@ -201,6 +211,7 @@ public void setSurfaceRatios() {
     Rectangle bounds = s.getPolygon().getBounds();
     surfaceBounds[i][0] = bounds.width;
     surfaceBounds[i][1] = bounds.height;
+    //s.setDimensions(surfaceBounds[i][0],surfaceBounds[i][1]);
   }
 }
 

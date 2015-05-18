@@ -40,7 +40,7 @@ public class MovieSketch extends AbstractSketch {
         if(!init) focus();
       
         graphics.beginDraw();
-        graphics.background(255);
+        graphics.background(0);
           
         PImage curFrame;
         // Crop using our already-figured-out ratios
@@ -75,7 +75,7 @@ public class MovieSketch extends AbstractSketch {
         startY = Math.round((targetWidth/sourceRatio)/2 - targetHeight/2);;
       } else {
         // scale to fill height, lose some width
-        targetWidth = Math.round(this.sWidth)+50; // +50 accounts for some math error TODO no.
+        targetWidth = Math.round(this.sWidth); // +50 accounts for some math error TODO no.
         targetHeight = graphics.height;
         startX = Math.round(targetHeight*sourceRatio/2 - targetWidth/2);
         startY = 0;
