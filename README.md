@@ -1,5 +1,4 @@
 # Interactive Music Experience
-Live projection mapping audio and video performance.
 Interactive is an experiment in projection mapping computer generated visuals and videos that respond to changes in music. The project is built in Processing.
 
 
