@@ -21,7 +21,7 @@ Adding visualizations is simple. I recommend copying the format of the existing 
 
 
 ## Team
-Andrew Hollenbach @ahollenbach
-Isaac Banner @ibanner56
-Janice Mok
-Thomas Tikos-Kadji
+- Andrew Hollenbach (@ahollenbach)
+- Isaac Banner (@ibanner56)
+- Janice Mok
+- Thomas Tikos-Kadji
