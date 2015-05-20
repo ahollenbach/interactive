@@ -1,5 +1,6 @@
 # Interactive Music Experience
-Live projection mapping audio and video performance
+Live projection mapping audio and video performance.
+Interactive is an experiment in projection mapping computer generated visuals and videos that respond to changes in music. The project is built in Processing.
 
 
 ## Setup
@@ -18,3 +19,10 @@ Simply open SketchMapperMain and press play! To go full-screen, go to ```Menu > 
 
 ## Adding visualizations
 Adding visualizations is simple. I recommend copying the format of the existing visualizations and starting from there. If you want a non-black background, be sure to establish it in ```setup()```, as establishing it in the ```draw()``` routine will overwrite the visualization every time (unless this is something you want to do). You also need to add your sketch to the list of possible sketches in [SketchMapperMain.pde](SketchMapperMain/SketchMapperMain.pde). Make sure to give it a human-readable name that will appear in the dropdown.
+
+
+## Team
+Andrew Hollenbach @ahollenbach
+Isaac Banner @ibanner56
+Janice Mok
+Thomas Tikos-Kadji
