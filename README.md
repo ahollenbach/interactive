@@ -28,3 +28,4 @@ Adding visualizations is simple. I recommend copying the format of the existing 
 - Isaac Banner (@ibanner56)
 - Janice Mok
 - Thomas Tikos-Kadji
+- Chris Demetriou (Last Dot)
