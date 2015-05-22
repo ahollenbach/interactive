@@ -1,6 +1,9 @@
 # Interactive Music Experience
 Interactive is an experiment in projection mapping computer generated visuals and videos that respond to changes in music. The project is built in Processing.
 
+![Setting up the surfaces](https://raw.githubusercontent.com/ahollenbach/interactive/master/images/demo1.jpg)
+
+![Live performance](https://raw.githubusercontent.com/ahollenbach/interactive/master/images/demo2.jpg)
 
 ## Setup
 This project has a few dependencies before we can get started.
